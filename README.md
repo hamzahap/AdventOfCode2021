@@ -1,2 +1,2 @@
 # AdventOfCode2021
-What 
+I think Im doing this in Java
