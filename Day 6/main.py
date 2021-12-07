@@ -1,17 +1,15 @@
 import sys
 
-file = open('input.txt').readlines()
-fishyboi = [0] * 9
+file = sys.argv[1] if len(sys.argv)>1 else 'inputexample.txt'
 
-for line in file:
-  for fishyfishy in line.strip().split(","):
-    fishyboi[int(fishyfishy)] += 1
-
-
+for line in open(file):
+  fishyboi = list(line.split(","))
+fishyboi = [int(x) for x in fishyboi]
 for x in range (256):
-  zero = fishyboi[0]
-  fishyboi[0:8] = fishyboi[1:]
-  fishyboi[6] += zero
-  fishyboi[8] = zero
+  for y in range(len(fishyboi)):
+    fishyboi[y] -= 1
+    if fishyboi[y] == -1:
+      fishyboi.append(8)
+      fishyboi[y] = 6
 
-print(sum(fishyboi))
+print(len(fishyboi))
