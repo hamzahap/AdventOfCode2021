@@ -1,16 +1,19 @@
 import sys
-import numpy as np
+import timeit
 
-file = sys.argv[1] if len(sys.argv)>1 else 'input.txt'
+file = open('input.txt').readlines()
+fishyboi = [0] * 9
 
-for line in open(file):
-  fishyboi = np.array(line.strip().split(","))
-fishyboi = fishyboi.astype(int)
+for line in file:
+  for fishyfishy in line.strip().split(","):
+    fishyboi[int(fishyfishy)] += 1
+
+
 for x in range (256):
-  for y in range(fishyboi.size):
-    fishyboi[y] -= 1
-    if fishyboi[y] == -1:
-      fishyboi = np.append(fishyboi,8)
-      fishyboi[y] = 6
+  zero = fishyboi[0]
+  fishyboi[0:8] = fishyboi[1:]
+  fishyboi[6] += zero
+  fishyboi[8] = zero
 
-print(fishyboi.size)
+print(sum(fishyboi))
+
